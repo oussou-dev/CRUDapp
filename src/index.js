@@ -30,14 +30,12 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="text-center p-4">
-				<h1 className="text-capitalize">
-					todos app
-				</h1>
+				<h1 className="text-capitalize">todos app</h1>
 				<div className="container">
 					<ul className="list-group">
 						{this.state.todos.map(todo => {
 							return (
-								<li className="list-group-item">
+								<li key={todo.id} className="list-group-item">
 									{todo.name}
 								</li>
 							)
@@ -49,7 +47,5 @@ export default class App extends React.Component {
 	}
 }
 
-const rootElement = document.getElementById(
-	"root"
-)
+const rootElement = document.getElementById("root")
 ReactDOM.render(<App />, rootElement)
