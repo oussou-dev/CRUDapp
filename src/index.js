@@ -3,33 +3,53 @@ import ReactDOM from "react-dom"
 
 import "./styles.css"
 
-function App() {
-	return (
-		<div className="text-center p-4">
-			<h1 className="text-capitalize">
-				todos app
-			</h1>
-			<div className="container">
-				<ul className="list-group">
-					<li className="list-group-item">
-						BUY SOME CLOTHES
-					</li>
-					<li className="list-group-item">
-						WRITE SOME CODE
-					</li>
-					<li className="list-group-item">
-						WATCH NETFLIX
-					</li>
-				</ul>
+export default class App extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			todos: [
+				{
+					id: 1,
+					name: "Play golf"
+				},
+				{
+					id: 2,
+					name: "Buy some clothes"
+				},
+				{
+					id: 3,
+					name: "Write some code"
+				},
+				{
+					id: 4,
+					name: "Watch Netflix"
+				}
+			]
+		}
+	}
+	render() {
+		return (
+			<div className="text-center p-4">
+				<h1 className="text-capitalize">
+					todos app
+				</h1>
+				<div className="container">
+					<ul className="list-group">
+						{this.state.todos.map(todo => {
+							return (
+								<li className="list-group-item">
+									{todo.name}
+								</li>
+							)
+						})}
+					</ul>
+				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
 
 const rootElement = document.getElementById(
 	"root"
 )
-ReactDOM.render(
-	<App />,
-	rootElement
-)
+ReactDOM.render(<App />, rootElement)
