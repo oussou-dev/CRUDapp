@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-
 import "./styles.css"
+// Math.random().toString(34).slice(2)
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -34,14 +34,23 @@ export default class App extends React.Component {
 		this.setState({
 			newTodo: e.target.value
 		})
-		// console.log(e.target.name, e.target.value)
+	}
+
+	addTodo = e => {
+		e.preventDefault()
+		const newTodo = {
+			id: this.state.todos[this.state.todos.length - 1].id + 1,
+			name: this.state.newTodo
+		}
+		this.setState({
+			todos: [...this.state.todos, newTodo],
+			newTodo: ""
+		})
 	}
 
 	render() {
-		console.log(this.state.newTodo)
-
 		return (
-			<div className="text-center p-4">
+			<div className="text-center m-4">
 				<h1 className="text-capitalize">todos app</h1>
 				<input
 					type="text"
@@ -51,6 +60,14 @@ export default class App extends React.Component {
 					onChange={this.handleChange}
 					value={this.state.newTodo}
 				/>
+
+				<button
+					className="btn-info form-control mb-3"
+					onClick={this.addTodo}
+				>
+					Add Todo
+				</button>
+
 				<div className="container">
 					<ul className="list-group">
 						{this.state.todos.map(todo => {
