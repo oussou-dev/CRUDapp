@@ -6,7 +6,9 @@ import "./styles.css"
 export default class App extends React.Component {
 	constructor(props) {
 		super(props)
+
 		this.state = {
+			newTodo: "",
 			todos: [
 				{
 					id: 1,
@@ -27,10 +29,28 @@ export default class App extends React.Component {
 			]
 		}
 	}
+
+	handleChange = e => {
+		this.setState({
+			newTodo: e.target.value
+		})
+		// console.log(e.target.name, e.target.value)
+	}
+
 	render() {
+		console.log(this.state.newTodo)
+
 		return (
 			<div className="text-center p-4">
 				<h1 className="text-capitalize">todos app</h1>
+				<input
+					type="text"
+					name="todo"
+					className="my-3 form-control"
+					placeholder="Add a new todo"
+					onChange={this.handleChange}
+					value={this.state.newTodo}
+				/>
 				<div className="container">
 					<ul className="list-group">
 						{this.state.todos.map(todo => {
