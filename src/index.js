@@ -9,6 +9,7 @@ export default class App extends React.Component {
 
 		this.state = {
 			newTodo: "",
+			editing: false,
 			todos: [
 				{
 					id: 1,
@@ -49,7 +50,7 @@ export default class App extends React.Component {
 	}
 
 	deleteTodo = index => {
-		console.log(index)
+		// console.log(index)
 
 		// creation d'une copie de todos => car state immutable
 		const todosCopied = this.state.todos
@@ -58,6 +59,19 @@ export default class App extends React.Component {
 		// MAJ des todos avec suppression du todo cliqué
 		this.setState({
 			todos: todosCopied
+		})
+	}
+
+	updateTodo = index => {
+		// console.log(index)
+
+		// on recupere le Todo que l'on veut modifier
+		const todo = this.state.todos[index]
+
+		// au clic du button on passse en mode editing
+		this.setState({
+			editing: true,
+			newTodo: todo.name
 		})
 	}
 
@@ -78,7 +92,7 @@ export default class App extends React.Component {
 					className="btn-info form-control mb-3"
 					onClick={this.addTodo}
 				>
-					Add Todo
+					{this.state.editing ? "Edit Todo" : "Add Todo"}
 				</button>
 
 				<div className="container">
@@ -91,9 +105,14 @@ export default class App extends React.Component {
 								>
 									{todo.name}
 									<div className="todo-icon">
-										{/* <span className="mx-2 text-success">
+										<span
+											className="mx-2 text-success"
+											onClick={() => {
+												this.updateTodo(index)
+											}}
+										>
 											<i className="fas fa-pen" />
-										</span>*/}
+										</span>
 										<span
 											className="mx-2 text-danger"
 											onClick={() => {
