@@ -2,8 +2,10 @@
 
 ---
 
-[] Add todo
+[] Adding Bootstrap 4
 
-[] Update todo
+[] Creating todos
 
-[] Delete toto
+[] Deleting todos
+
+[] Updating todos

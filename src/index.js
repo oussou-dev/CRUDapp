@@ -48,6 +48,19 @@ export default class App extends React.Component {
 		})
 	}
 
+	deleteTodo = index => {
+		console.log(index)
+
+		// creation d'une copie de todos => car state immutable
+		const todosCopied = this.state.todos
+		// suppression du todo selectionné de la copie créee
+		delete todosCopied[index]
+		// MAJ des todos avec suppression du todo cliqué
+		this.setState({
+			todos: todosCopied
+		})
+	}
+
 	render() {
 		return (
 			<div className="text-center m-4">
@@ -70,10 +83,26 @@ export default class App extends React.Component {
 
 				<div className="container">
 					<ul className="list-group">
-						{this.state.todos.map(todo => {
+						{this.state.todos.map((todo, index) => {
 							return (
-								<li key={todo.id} className="list-group-item">
+								<li
+									key={index}
+									className="list-group-item d-flex my-1 justify-content-between"
+								>
 									{todo.name}
+									<div className="todo-icon">
+										{/* <span className="mx-2 text-success">
+											<i className="fas fa-pen" />
+										</span>*/}
+										<span
+											className="mx-2 text-danger"
+											onClick={() => {
+												this.deleteTodo(index)
+											}}
+										>
+											<i className="fas fa-trash-alt" />
+										</span>
+									</div>
 								</li>
 							)
 						})}
