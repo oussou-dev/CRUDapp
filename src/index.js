@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import "./styles.css"
+// import uuid from "uuid"
 // Math.random().toString(34).slice(2)
 
 export default class App extends React.Component {
@@ -32,6 +33,14 @@ export default class App extends React.Component {
 		}
 	}
 
+	generateTodoId() {
+		const lastTodo = this.state.todos[this.state.todos.length - 1]
+		if (lastTodo) {
+			return lastTodo.id + 1
+		}
+		return 1
+	}
+
 	handleChange = e => {
 		this.setState({
 			newTodo: e.target.value
@@ -39,15 +48,29 @@ export default class App extends React.Component {
 	}
 
 	addTodo = e => {
+		// on previent la comportement par default du navigateur
 		e.preventDefault()
+
+		// on recupere les donnees de la new todo
 		const newTodo = {
-			id: this.state.todos[this.state.todos.length - 1].id + 1,
+			id: this.generateTodoId,
 			name: this.state.newTodo
 		}
-		this.setState({
-			todos: [...this.state.todos, newTodo],
-			newTodo: ""
-		})
+
+		// si l'input contient une valeur
+		if (newTodo.name) {
+			// on ajoute la new todo au tableau des todos
+			const todos = this.state.todos
+			todos.push(newTodo)
+
+			// on met à jour le state et on vide l'input
+			this.setState({
+				todos: todos,
+				newTodo: ""
+			})
+		} else {
+			alert("Ajouter un titre !")
+		}
 	}
 
 	deleteTodo = index => {
@@ -117,40 +140,38 @@ export default class App extends React.Component {
 					{this.state.editing ? "Update Todo" : "Add Todo"}
 				</button>
 
-				<div className="container">
-					{!this.state.editing && (
-						<ul className="list-group">
-							{this.state.todos.map((todo, index) => {
-								return (
-									<li
-										key={index}
-										className="list-group-item d-flex my-1 justify-content-between"
-									>
-										{todo.name}
-										<div className="todo-icon">
-											<span
-												className="mx-2 text-success"
-												onClick={() => {
-													this.editTodo(index)
-												}}
-											>
-												<i className="fas fa-pen" />
-											</span>
-											<span
-												className="mx-2 text-danger"
-												onClick={() => {
-													this.deleteTodo(index)
-												}}
-											>
-												<i className="fas fa-trash-alt" />
-											</span>
-										</div>
-									</li>
-								)
-							})}
-						</ul>
-					)}
-				</div>
+				{!this.state.editing && (
+					<ul className="list-group">
+						{this.state.todos.map((todo, index) => {
+							return (
+								<li
+									key={index}
+									className="list-group-item d-flex my-1 justify-content-between"
+								>
+									{todo.name}
+									<div className="todo-icon">
+										<span
+											className="mx-2 text-success"
+											onClick={() => {
+												this.editTodo(index)
+											}}
+										>
+											<i className="fas fa-pen" />
+										</span>
+										<span
+											className="mx-2 text-danger"
+											onClick={() => {
+												this.deleteTodo(index)
+											}}
+										>
+											<i className="fas fa-trash-alt" />
+										</span>
+									</div>
+								</li>
+							)
+						})}
+					</ul>
+				)}
 			</div>
 		)
 	}

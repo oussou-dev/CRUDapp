@@ -4,8 +4,10 @@
 
 - [x] Adding Bootstrap 4
 
-- [ ] Creating todos
+- [x] Creating todos
 
-- [ ] Deleting todos
+- [x] Deleting todos
 
-- [ ] Updating todos
+- [x] Updating todos
+
+- [] Alert notifications
