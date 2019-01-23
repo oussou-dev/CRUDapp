@@ -10,6 +10,7 @@ export default class App extends React.Component {
 		this.state = {
 			newTodo: "",
 			editing: false,
+			editingIndex: null,
 			todos: [
 				{
 					id: 1,
@@ -71,11 +72,28 @@ export default class App extends React.Component {
 		// au clic du button on passse en mode editing
 		this.setState({
 			editing: true,
-			newTodo: todo.name
+			newTodo: todo.name,
+			editingIndex: index
 		})
 	}
 
-	updateTodo = index => {}
+	updateTodo = () => {
+		// on recupere la liste des todos
+		const todos = this.state.todos
+
+		// on recupere le todo à editer
+		const todoToUpdate = todos[this.state.editingIndex]
+
+		// on maj le nom du todo avec les modifs
+		todoToUpdate.name = this.state.newTodo
+
+		this.setState({
+			todos: todos,
+			newTodo: "",
+			editing: false,
+			editingIndex: null
+		})
+	}
 
 	render() {
 		return (
