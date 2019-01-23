@@ -62,7 +62,7 @@ export default class App extends React.Component {
 		})
 	}
 
-	updateTodo = index => {
+	editTodo = index => {
 		// console.log(index)
 
 		// on recupere le Todo que l'on veut modifier
@@ -74,6 +74,8 @@ export default class App extends React.Component {
 			newTodo: todo.name
 		})
 	}
+
+	updateTodo = index => {}
 
 	render() {
 		return (
@@ -90,42 +92,46 @@ export default class App extends React.Component {
 
 				<button
 					className="btn-info form-control mb-3"
-					onClick={this.addTodo}
+					onClick={
+						this.state.editing ? this.updateTodo : this.addTodo
+					}
 				>
-					{this.state.editing ? "Edit Todo" : "Add Todo"}
+					{this.state.editing ? "Update Todo" : "Add Todo"}
 				</button>
 
 				<div className="container">
-					<ul className="list-group">
-						{this.state.todos.map((todo, index) => {
-							return (
-								<li
-									key={index}
-									className="list-group-item d-flex my-1 justify-content-between"
-								>
-									{todo.name}
-									<div className="todo-icon">
-										<span
-											className="mx-2 text-success"
-											onClick={() => {
-												this.updateTodo(index)
-											}}
-										>
-											<i className="fas fa-pen" />
-										</span>
-										<span
-											className="mx-2 text-danger"
-											onClick={() => {
-												this.deleteTodo(index)
-											}}
-										>
-											<i className="fas fa-trash-alt" />
-										</span>
-									</div>
-								</li>
-							)
-						})}
-					</ul>
+					{!this.state.editing && (
+						<ul className="list-group">
+							{this.state.todos.map((todo, index) => {
+								return (
+									<li
+										key={index}
+										className="list-group-item d-flex my-1 justify-content-between"
+									>
+										{todo.name}
+										<div className="todo-icon">
+											<span
+												className="mx-2 text-success"
+												onClick={() => {
+													this.editTodo(index)
+												}}
+											>
+												<i className="fas fa-pen" />
+											</span>
+											<span
+												className="mx-2 text-danger"
+												onClick={() => {
+													this.deleteTodo(index)
+												}}
+											>
+												<i className="fas fa-trash-alt" />
+											</span>
+										</div>
+									</li>
+								)
+							})}
+						</ul>
+					)}
 				</div>
 			</div>
 		)

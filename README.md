@@ -2,10 +2,10 @@
 
 ---
 
-[x] Adding Bootstrap 4
+- [x] Adding Bootstrap 4
 
-[ ] Creating todos
+- [ ] Creating todos
 
-[ ] Deleting todos
+- [ ] Deleting todos
 
-[ ] Updating todos
+- [ ] Updating todos
