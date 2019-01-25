@@ -28,32 +28,22 @@ export default class App extends React.Component {
 		})
 	}
 
-	generateTodoId() {
-		const lastTodo = this.state.todos[this.state.todos.length - 1]
-		if (lastTodo) {
-			return lastTodo.id + 1
-		}
-		return 1
-	}
-
 	handleChange = e => {
 		this.setState({
 			newTodo: e.target.value
 		})
 	}
 
-	addTodo = e => {
+	addTodo = async e => {
 		// on previent la comportement par default du navigateur
 		e.preventDefault()
 
-		// on recupere les donnees de la new todo
-		const newTodo = {
-			id: this.generateTodoId,
+		const response = await axios.post(`${apiUrl}/todos`, {
 			name: this.state.newTodo
-		}
+		})
 
 		const todos = this.state.todos
-		todos.push(newTodo)
+		todos.push(response.data)
 
 		// on met à jour le state et on vide l'input
 		this.setState({
@@ -61,22 +51,7 @@ export default class App extends React.Component {
 			newTodo: ""
 		})
 
-		this.alert("Todo deleted successfully")
-
-		/* // si l'input contient une valeur > 5 caracteres
-		if (newTodo.name.length > 5) {
-			// on ajoute la new todo au tableau des todos
-			const todos = this.state.todos
-			todos.push(newTodo)
-
-			// on met à jour le state et on vide l'input
-			this.setState({
-				todos: todos,
-				newTodo: ""
-			})
-		} else {
-			alert("Ajouter un titre de + de 5 caractères !")
-		} */
+		this.alert("Todo added successfully")
 	}
 
 	alert = notification => {
