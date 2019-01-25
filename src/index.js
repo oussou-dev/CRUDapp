@@ -2,7 +2,9 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./styles.css"
 import ListItem from "./components/ListItem"
-import apiUrl from "./mockApi/mockApi"
+import { apiUrl } from "./mockApi/mockApi"
+import axios from "axios"
+
 // import uuid from "uuid"
 // Math.random().toString(34).slice(2)
 
@@ -17,6 +19,13 @@ export default class App extends React.Component {
 			notification: null,
 			todos: []
 		}
+	}
+
+	async componentDidMount() {
+		const response = await axios.get(`${apiUrl}/todos`)
+		this.setState({
+			todos: response.data
+		})
 	}
 
 	generateTodoId() {
@@ -139,7 +148,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="text-center m-4">
-				<h1 className="text-capitalize">todos app</h1>
+				<h1 className="card py-2 text-capitalize">todos app</h1>
 				{this.setTimeOut}
 				{this.state.notification && (
 					<div className="alert alert-success">
