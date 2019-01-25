@@ -2,6 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./styles.css"
 import ListItem from "./components/ListItem"
+import apiUrl from "./mockApi/mockApi"
 // import uuid from "uuid"
 // Math.random().toString(34).slice(2)
 
@@ -14,24 +15,7 @@ export default class App extends React.Component {
 			editing: false,
 			editingIndex: null,
 			notification: null,
-			todos: [
-				{
-					id: 1,
-					name: "Play golf"
-				},
-				{
-					id: 2,
-					name: "Buy some clothes"
-				},
-				{
-					id: 3,
-					name: "Write some code"
-				},
-				{
-					id: 4,
-					name: "Watch Netflix"
-				}
-			]
+			todos: []
 		}
 	}
 
