@@ -13,6 +13,7 @@ export default class App extends React.Component {
 			newTodo: "",
 			editing: false,
 			editingIndex: null,
+			notification: null,
 			todos: [
 				{
 					id: 1,
@@ -58,7 +59,18 @@ export default class App extends React.Component {
 			name: this.state.newTodo
 		}
 
-		// si l'input contient une valeur
+		const todos = this.state.todos
+		todos.push(newTodo)
+
+		// on met à jour le state et on vide l'input
+		this.setState({
+			todos: todos,
+			newTodo: ""
+		})
+
+		this.alert("Todo deleted successfully")
+
+		/* // si l'input contient une valeur
 		if (newTodo.name) {
 			// on ajoute la new todo au tableau des todos
 			const todos = this.state.todos
@@ -71,7 +83,19 @@ export default class App extends React.Component {
 			})
 		} else {
 			alert("Ajouter un titre !")
-		}
+		} */
+	}
+
+	alert = notification => {
+		this.setState({
+			notification: notification
+		})
+
+		setTimeout(() => {
+			this.setState({
+				notification: null
+			})
+		}, 1000)
 	}
 
 	deleteTodo = index => {
@@ -85,6 +109,7 @@ export default class App extends React.Component {
 		this.setState({
 			todos: todosCopied
 		})
+		this.alert("Todo deleted successfully")
 	}
 
 	editTodo = index => {
@@ -117,12 +142,23 @@ export default class App extends React.Component {
 			editing: false,
 			editingIndex: null
 		})
+
+		this.alert("Todo updated successfully")
 	}
 
 	render() {
 		return (
 			<div className="text-center m-4">
 				<h1 className="text-capitalize">todos app</h1>
+				{this.setTimeOut}
+				{this.state.notification && (
+					<div className="alert alert-success">
+						<p className="text-center my-0">
+							{this.state.notification}
+						</p>
+					</div>
+				)}
+
 				<input
 					type="text"
 					name="todo"
@@ -153,6 +189,9 @@ export default class App extends React.Component {
 									}}
 									deleteTodo={() => {
 										this.deleteTodo(index)
+									}}
+									editTodo={() => {
+										this.editTodo(index)
 									}}
 								/>
 							)
