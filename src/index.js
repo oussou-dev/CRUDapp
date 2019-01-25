@@ -4,6 +4,7 @@ import "./styles.css"
 import ListItem from "./components/ListItem"
 import { apiUrl } from "./mockApi/mockApi"
 import axios from "axios"
+import loadingGif from "../loading.gif"
 
 // import uuid from "uuid"
 // Math.random().toString(34).slice(2)
@@ -17,15 +18,20 @@ export default class App extends React.Component {
 			editing: false,
 			editingIndex: null,
 			notification: null,
-			todos: []
+			todos: [],
+			loading: true
 		}
 	}
 
 	async componentDidMount() {
 		const response = await axios.get(`${apiUrl}/todos`)
-		this.setState({
-			todos: response.data
-		})
+
+		setTimeout(() => {
+			this.setState({
+				todos: response.data,
+				loading: false
+			})
+		}, 1000)
 	}
 
 	handleChange = e => {
@@ -99,15 +105,15 @@ export default class App extends React.Component {
 	}
 
 	updateTodo = async () => {
-		// on recupere la liste des todos
-		const todos = this.state.todos
-
 		// on recupere le todo à editer
-		const todo = todos[this.state.editingIndex]
+		const todo = this.state.todos[this.state.editingIndex]
 
-		const response = axios.put(`${apiUrl}/todos/${todo.id}`, {
+		const response = await axios.put(`${apiUrl}/todos/${todo.id}`, {
 			name: this.state.newTodo
 		})
+
+		// on recupere la liste des todos maj
+		const todos = this.state.todos
 
 		// on maj le nom du todo avec les modifs
 		todos[this.state.editingIndex] = response.data
@@ -130,7 +136,7 @@ export default class App extends React.Component {
 
 	render() {
 		return (
-			<div className="text-center m-4">
+			<div className="text-center m-4 col-md-5 mr-auto ml-auto">
 				<h1 className="card py-2 text-capitalize">todos app</h1>
 				{this.setTimeOut}
 				{this.state.notification && (
@@ -161,7 +167,11 @@ export default class App extends React.Component {
 					{this.state.editing ? "Update Todo" : "Add Todo"}
 				</button>
 
-				{!this.state.editing && (
+				{this.state.loading && (
+					<img src={loadingGif} alt="loadingGif" height={150} />
+				)}
+
+				{(!this.state.editing || this.state.loading) && (
 					<ul className="list-group">
 						{this.state.todos.map((todo, index) => {
 							return (
