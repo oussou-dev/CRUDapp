@@ -10,4 +10,4 @@
 
 - [x] Updating todos
 
-- [] Alert notifications
+- [ ] Alert notifications

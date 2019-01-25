@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import "./styles.css"
+import ListItem from "./components/ListItem"
 // import uuid from "uuid"
 // Math.random().toString(34).slice(2)
 
@@ -144,30 +145,16 @@ export default class App extends React.Component {
 					<ul className="list-group">
 						{this.state.todos.map((todo, index) => {
 							return (
-								<li
-									key={index}
-									className="list-group-item d-flex my-1 justify-content-between"
-								>
-									{todo.name}
-									<div className="todo-icon">
-										<span
-											className="mx-2 text-success"
-											onClick={() => {
-												this.editTodo(index)
-											}}
-										>
-											<i className="fas fa-pen" />
-										</span>
-										<span
-											className="mx-2 text-danger"
-											onClick={() => {
-												this.deleteTodo(index)
-											}}
-										>
-											<i className="fas fa-trash-alt" />
-										</span>
-									</div>
-								</li>
+								<ListItem
+									key={todo.id}
+									todo={todo}
+									addTodo={() => {
+										this.addTodo(index)
+									}}
+									deleteTodo={() => {
+										this.deleteTodo(index)
+									}}
+								/>
 							)
 						})}
 					</ul>
