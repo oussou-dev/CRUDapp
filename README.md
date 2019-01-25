@@ -36,8 +36,6 @@ _Note: You may need to add “sudo” in front of any global commands to install
 
 ## ScreenShots
 
-All app preview screenshots were taken by running `ionic serve --lab`.
-
 | ![Screenshot1](https://github.com/oussou-dev/CRUDapp/blob/master/sc-1.png) | ![Screenshot2](https://github.com/oussou-dev/CRUDapp/blob/master/sc-2.png) | ![Screenshot3](https://github.com/oussou-dev/CRUDapp/blob/master/sc-3.png) |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 |                                                                            |                                                                            |                                                                            |
