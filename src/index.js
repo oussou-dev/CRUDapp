@@ -70,8 +70,8 @@ export default class App extends React.Component {
 
 		this.alert("Todo deleted successfully")
 
-		/* // si l'input contient une valeur
-		if (newTodo.name) {
+		/* // si l'input contient une valeur > 5 caracteres
+		if (newTodo.name.length > 5) {
 			// on ajoute la new todo au tableau des todos
 			const todos = this.state.todos
 			todos.push(newTodo)
@@ -82,7 +82,7 @@ export default class App extends React.Component {
 				newTodo: ""
 			})
 		} else {
-			alert("Ajouter un titre !")
+			alert("Ajouter un titre de + de 5 caractères !")
 		} */
 	}
 
@@ -146,6 +146,12 @@ export default class App extends React.Component {
 		this.alert("Todo updated successfully")
 	}
 
+	validateData = () => {
+		const value = this.state.newTodo
+		const test = value.length <= 5 ? true : false
+		return test
+	}
+
 	render() {
 		return (
 			<div className="text-center m-4">
@@ -169,7 +175,9 @@ export default class App extends React.Component {
 				/>
 
 				<button
-					className="btn-info form-control mb-3"
+					className="btn-success form-control mb-3"
+					// disabled={this.state.newTodo.length < 5}
+					disabled={this.validateData()}
 					onClick={
 						this.state.editing ? this.updateTodo : this.addTodo
 					}
