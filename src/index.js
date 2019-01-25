@@ -87,8 +87,6 @@ export default class App extends React.Component {
 	}
 
 	editTodo = index => {
-		// console.log(index)
-
 		// on recupere le Todo que l'on veut modifier
 		const todo = this.state.todos[index]
 
@@ -100,15 +98,19 @@ export default class App extends React.Component {
 		})
 	}
 
-	updateTodo = () => {
+	updateTodo = async () => {
 		// on recupere la liste des todos
 		const todos = this.state.todos
 
 		// on recupere le todo à editer
-		const todoToUpdate = todos[this.state.editingIndex]
+		const todo = todos[this.state.editingIndex]
+
+		const response = axios.put(`${apiUrl}/todos/${todo.id}`, {
+			name: this.state.newTodo
+		})
 
 		// on maj le nom du todo avec les modifs
-		todoToUpdate.name = this.state.newTodo
+		todos[this.state.editingIndex] = response.data
 
 		this.setState({
 			todos: todos,
