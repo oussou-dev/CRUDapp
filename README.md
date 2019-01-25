@@ -6,12 +6,6 @@ Todo App with React.js and Mock Api
 
 [Demo](https://x280y66q14.codesandbox.io/)
 
-## **Ionic foodChecker App**
-
-```
-Ionic 3 App with Angular 5 & [OpenFoodFacts](https://fr.openfoodfacts.org/) API
-```
-
 ## Table of Contents
 
 - [Getting Started](#getting-started)
