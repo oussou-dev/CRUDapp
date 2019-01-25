@@ -66,13 +66,19 @@ export default class App extends React.Component {
 		}, 1000)
 	}
 
-	deleteTodo = index => {
-		// console.log(index)
-
+	deleteTodo = async index => {
 		// creation d'une copie de todos => car state immutable
 		const todosCopied = this.state.todos
+
+		// on recupere le todo à supprimer
+		const todo = todosCopied[index]
+
+		// on fait un app https en passant l'id du toto à supprimer
+		await axios.delete(`${apiUrl}/todos/${todo.id}`)
+
 		// suppression du todo selectionné de la copie créee
 		delete todosCopied[index]
+
 		// MAJ des todos avec suppression du todo cliqué
 		this.setState({
 			todos: todosCopied
