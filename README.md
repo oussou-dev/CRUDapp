@@ -36,4 +36,4 @@ _Note: You may need to add “sudo” in front of any global commands to install
 
 ## ScreenCast
 
-![index_page](https://github.com/oussou-dev/CRUDapp/blob/master/img/screencast.webm)
+![index_page](https://github.com/oussou-dev/CRUDapp/blob/master/img/screencast.gif)
