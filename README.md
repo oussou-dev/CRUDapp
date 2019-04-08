@@ -10,7 +10,7 @@ Todo App with React.js and Mock Api
 
 - [Getting Started](#getting-started)
 - [Features](#features)
-- [ScreenShots](#screenshots)
+- [ScreenCast](#screencast)
 
 ## Getting Started
 
