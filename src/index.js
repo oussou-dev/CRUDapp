@@ -41,7 +41,7 @@ export default class App extends React.Component {
 	}
 
 	addTodo = async e => {
-		// on previent la comportement par default du navigateur
+		// on previent le comportement par default du navigateur
 		e.preventDefault()
 
 		const response = await axios.post(`${apiUrl}/todos`, {
